@@ -37,7 +37,7 @@ const registerUser = asynchandler(async (req, res) => {
 
 
    if(user){
-    res.status(201).json({
+    res.status(201).json({ // sending all of this is not necessary only the token is also sufficient
         _id: user.id,
         name: user.name,
         email: user.email,
@@ -83,13 +83,8 @@ const loginUser = asynchandler(async(req, res) => {
 // @route GET /api/users/me
 // @access Private
 const getMe = asynchandler( async(req, res) => {
-    const {_id, name, email} = await User.findById(req.user.id)
     
-    res.status(200).json({
-        id: _id,
-        name,
-        email,
-    })
+    res.status(200).json(req.user)
 }
 )
 
